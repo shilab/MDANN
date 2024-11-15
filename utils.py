@@ -147,17 +147,10 @@ def plot_test(epochs,metrics,axis_label,label,color,domain_marker,auc=False):
         for j,domain in enumerate(domain_marker):
             val1 = [x['acc_{}_pos'.format(domain)] for x in metrics[i]]
             val2 = [x['acc_{}_neg'.format(domain)] for x in metrics[i]]
-            
-            val4 = []
-            for x in val1:
-                if x>0.8:
-                    x -=0.1
-                elif x <0.7:
-                    x += 0.1
-                val4.append(x)
+
             
             axs[a,j*2+1].plot(epochs, val2, label='minority', linestyle='-',color='r', linewidth=linewidth)
-            axs[a,j*2+1].plot(epochs, val4, label='majority'.format(domain), linestyle='-',color='b', linewidth=linewidth)                
+            axs[a,j*2+1].plot(epochs, val1, label='majority'.format(domain), linestyle='-',color='b', linewidth=linewidth)                
             
             val3 = [y/x for x,y in zip(val1,val2)]
             #val3 = [x['di_{}'.format(domain)] for x in metrics[i]]
